@@ -6,6 +6,8 @@
 
 #include <algorithm>
 
+#include "aux_type_traits.hpp"
+
 namespace eps
 {
 	class __op_in_helper {};
@@ -55,13 +57,7 @@ namespace eps
 	auto operator*(__op_in_lval<T>&& l, C&& c) ->
 	typename std::enable_if<
 		!std::is_rvalue_reference<decltype(c)>::value &&
-		!std::is_const<
-			typename std::remove_pointer<
-				typename std::iterator_traits<
-					decltype(std::begin(std::declval<C&>()))
-				>::pointer
-			>::type
-		>::value,
+		!is_const_container<C>::value,
 		T
 	>::type
 	{
@@ -76,13 +72,7 @@ namespace eps
 	auto operator*(__op_in_lval<T>&& l, C&& c) ->
 	typename std::enable_if<
 		!std::is_rvalue_reference<decltype(c)>::value &&
-		std::is_const<
-			typename std::remove_pointer<
-				typename std::iterator_traits<
-					decltype(std::begin(std::declval<C&>()))
-				>::pointer
-			>::type
-		>::value,
+		is_const_container<C>::value,
 		const typename std::remove_reference<T>::type&
 	>::type
 	{
