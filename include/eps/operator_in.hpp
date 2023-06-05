@@ -32,9 +32,8 @@ namespace eps
 	{ return __op_in_lval<const T&>{std::forward<T>(val)}; }
 
 	template<typename T>
-	class __op_in_lval
+	struct __op_in_lval
 	{
-	public:
 		T v;
 		__op_in_lval(T&& val): v{std::forward<T>(val)} {}
 	};
