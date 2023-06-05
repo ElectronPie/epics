@@ -10,7 +10,7 @@
 
 namespace eps
 {
-	class __op_in_helper {};
+	struct __op_in_helper {};
 
 	template<typename T>
 	struct __op_in_lval;
