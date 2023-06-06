@@ -46,4 +46,12 @@ namespace eps
 #if __cplusplus >= 201703L
     template<typename C> inline constexpr bool is_const_container_v = is_const_container<C>::value;
 #endif
+
+    template<typename C>
+    struct element_of
+    {
+        using type = decltype(*(std::begin(std::declval<C&>())));
+    };
+
+    template<typename C> using element_of_t = typename element_of<C>::type;
 }
