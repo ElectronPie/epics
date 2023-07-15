@@ -41,18 +41,22 @@ namespace eps
 	template<typename T>
 	struct __op_in_lval
 	{
-		const T& val;
-		__op_in_lval(const T& _val): val{_val} {}
+		T val;
+		__op_in_lval(T _val): val{std::forward<T>(_val)} {}
 	};
 
 	template<typename T>
-	__op_in_lval<T> operator*(const T& val, __op_in_helper)
-	{ return __op_in_lval<T>(val); }
+	__op_in_lval<const T&&> operator*(const T& val, __op_in_helper)
+	{ return __op_in_lval<const T&>(val); }
+
+	template<typename T>
+	__op_in_lval<T&&> operator*(T&& val, __op_in_helper)
+	{ return __op_in_lval<T&&>(std::move(val)); }
 
 	template<typename T, typename C>
 	auto operator*(__op_in_lval<T> l, C&& c) ->
-	decltype(operator_in(l.val, std::forward<C>(c)))
-	{ return operator_in(l.val, std::forward<C>(c)); }
+	decltype(operator_in(std::forward<T>(l.val), std::forward<C>(c)))
+	{ return operator_in(std::forward<T>(l.val), std::forward<C>(c)); }
 }
 
 #define in * eps::__op_in_helper{} *
