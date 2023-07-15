@@ -50,7 +50,7 @@ namespace eps
     template<typename C>
     struct element_of
     {
-        using type = decltype(*(std::begin(std::declval<C&>())));
+        using type = typename std::remove_reference<decltype(*(std::begin(std::declval<C&>())))>::type;
     };
 
     template<typename C> using element_of_t = typename element_of<C>::type;

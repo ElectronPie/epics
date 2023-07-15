@@ -12,19 +12,25 @@ namespace eps
 {
 	template<typename T, typename C>
 	auto operator_in(T&& t, C&& c) ->
-	typename eps::element_of<decltype(c)>::type
+	std::pair<
+		typename eps::element_of<C>::type,
+		bool
+	>
 	{
-		typename std::remove_reference<
+		/*typename std::remove_reference<
 			typename eps::element_of<decltype(c)>::type
-		>::type static def;
+		>::type static def;*/
 		auto match = std::find(
 			std::begin(std::forward<C>(c)),
 			std::end  (std::forward<C>(c)),
 			std::forward<T>(t)
 		);
-		if(match == std::end(std::forward<C>(c)))
-			return def;
-		return *match;
+		return {
+			(match == std::end(std::forward<C>(c)))?
+				typename eps::element_of<C>::type{}:
+				*match,
+			match != std::end(std::forward<C>(c))
+		};
 	}
 }
 
