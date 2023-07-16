@@ -47,6 +47,16 @@ namespace eps
     template<typename C> inline constexpr bool is_const_container_v = is_const_container<C>::value;
 #endif
 
+#if __cplusplus >= 201703L
+    template<typename, typename>
+    struct is_same_template_class : std::false_type {};
+
+    template<template<typename...> class T, typename... A, typename... B>
+    struct is_same_template_class<T<A...>, T<B...>> : std::true_type {};
+
+    template<class Ta, class Tb> inline constexpr bool is_same_template_class_v = is_same_template_class<Ta, Tb>::value;
+#endif
+
     template<typename C>
     struct element_of
     {
