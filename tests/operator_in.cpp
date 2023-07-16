@@ -6,14 +6,6 @@
 
 #include "../include/eps/operator_in.hpp"
 
-template<typename T>
-inline static bool check_presency(std::pair<T, bool> res, bool invert)
-{
-    return !invert ?
-        res.first != T{} &&  res.second:
-        res.first == T{} && !res.second;
-}
-
 int main(int argc, char* argv[])
 {
     std::initializer_list<std::string> song{
