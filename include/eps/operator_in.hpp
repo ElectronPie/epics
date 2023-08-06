@@ -46,11 +46,18 @@ namespace eps
 	};
 
 	template<typename T>
-	__op_in_lval<const T&&> operator*(const T& val, __op_in_helper)
+	__op_in_lval<const T&> operator*(const T& val, __op_in_helper)
 	{ return __op_in_lval<const T&>(val); }
 
 	template<typename T>
-	__op_in_lval<T&&> operator*(T&& val, __op_in_helper)
+	auto operator*(T&& val, __op_in_helper) ->
+	typename std::enable_if<
+		!std::is_const<
+			typename std::remove_reference<T>::type
+		>::value &&
+		std::is_rvalue_reference<T>::value,
+		__op_in_lval<T&&>
+	>::type
 	{ return __op_in_lval<T&&>(std::move(val)); }
 
 	template<typename T, typename C>
