@@ -7,6 +7,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(doctest)
 # Adds doctest::doctest
 
-add_executable(test_epics tests.cpp operator_in.cpp)
-target_link_libraries(test_epics PRIVATE epics doctest::doctest)
-add_test(NAME test_epics_test COMMAND test_epics)
+add_executable(test_operator_in11 operator_in11.cpp)
+target_compile_features(test_operator_in11 PRIVATE cxx_std_11)
+target_link_libraries(test_operator_in11 PRIVATE epics doctest::doctest)
+add_test(NAME test_operator_in_test11 COMMAND test_operator_in11)

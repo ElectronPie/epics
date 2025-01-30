@@ -1,7 +1,7 @@
 #pragma once
 
 #include <algorithm>
-#include <type_traits>
+
 
 namespace eps
 {
@@ -16,15 +16,18 @@ namespace eps
         const T& val;
     };
 
-    template<typename T, typename C>
-    bool operator|(__operator_in_lhs<T> lhs, C&& c)
+    template<
+        typename T,
+        typename C,
+        typename... Args
+    > bool operator|(__operator_in_lhs<T> lhs, const C& c)
     {
         auto found = std::find(
-            std::begin(std::forward<C>(c)),
-            std::end(std::forward<C>(c)),
+            std::begin(c),
+            std::end(c),
             lhs.val
         );
-        return found != std::end(std::forward<C>(c));
+        return found != std::end(c);
     }
 
     struct __operator_in
