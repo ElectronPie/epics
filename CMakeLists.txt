@@ -5,7 +5,8 @@ project(epics CXX)
 add_library(epics INTERFACE)
 target_include_directories(epics INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include/")
 target_sources(epics INTERFACE
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/epics/operator_in11.hpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/epics/operator_in11.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/epics/pstream17.hpp")
 
 set(MAIN_PROJECT OFF)
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
