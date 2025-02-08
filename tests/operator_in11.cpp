@@ -15,7 +15,7 @@ TEST_CASE("testing operator in")
         std::vector<std::string> v{"Old", "Macdonald", "had", "a", "farm"};
         SUBCASE("")
         {
-            CHECK(true  == ("Old" in v));
+            CHECK(true == ("Old" in v));
         }
         SUBCASE("")
         {
@@ -28,7 +28,7 @@ TEST_CASE("testing operator in")
         std::list<std::string> l{"Old", "Macdonald", "had", "a", "farm"};
         SUBCASE("")
         {
-            CHECK(true  == ("had" in l));
+            CHECK(true == ("had" in l));
         }
         SUBCASE("")
         {
@@ -41,7 +41,7 @@ TEST_CASE("testing operator in")
         std::string s{"EIEIO"};
         SUBCASE("")
         {
-            CHECK(true  == ('E' in s));
+            CHECK(true == ('E' in s));
         }
         SUBCASE("")
         {
@@ -54,7 +54,7 @@ TEST_CASE("testing operator in")
         std::array<char, 5> a{'E', 'I', 'E', 'I', 'O'};
         SUBCASE("")
         {
-            CHECK(true  == ('I' in a));
+            CHECK(true == ('I' in a));
         }
         SUBCASE("")
         {
@@ -67,7 +67,7 @@ TEST_CASE("testing operator in")
         const char cs[] = "EIEIO";
         SUBCASE("")
         {
-            CHECK(true  == ('O' in cs));
+            CHECK(true == ('O' in cs));
         }
         SUBCASE("")
         {

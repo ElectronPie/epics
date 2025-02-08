@@ -2,32 +2,22 @@
 
 #include <algorithm>
 
-
 namespace eps
 {
     template<typename T>
     struct __operator_in_lhs
     {
     public:
-        __operator_in_lhs(const T& val):
-            val{val}
+        __operator_in_lhs(const T& val): val{val}
         {}
 
         const T& val;
     };
 
-    template<
-        typename T,
-        typename C,
-        typename... Args
-    > bool operator|(__operator_in_lhs<T> lhs, const C& c)
+    template<typename T, typename C, typename... Args>
+    bool operator|(__operator_in_lhs<T> lhs, const C& c)
     {
-        auto found = std::find(
-            std::begin(c),
-            std::end(c),
-            lhs.val
-        );
-        return found != std::end(c);
+        return std::find(std::begin(c), std::end(c), lhs.val) != std::end(c);
     }
 
     struct __operator_in

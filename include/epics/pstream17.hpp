@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <functional>
+#include <iostream>
 #include <mutex>
 #include <queue>
 #include <unordered_map>
@@ -21,15 +21,12 @@ namespace eps
         class __pistream_temp: pstream_base
         {
         public:
-            __pistream_temp(istream_t& istream):
-                m_istream{istream}
+            __pistream_temp(istream_t& istream): m_istream{istream}
             {}
 
-            __pistream_temp(__pistream_temp&& other):
-                m_istream{other.m_istream},
-                m_actions{std::move(other.m_actions)}
+            __pistream_temp(__pistream_temp&& other): m_istream{other.m_istream}, m_actions{std::move(other.m_actions)}
             {
-                while(!other.m_actions.empty())
+                while (!other.m_actions.empty())
                 {
                     other.m_actions.pop();
                 }
@@ -48,9 +45,7 @@ namespace eps
             template<typename T>
             __pistream_temp operator>>(T& val)
             {
-                m_actions.emplace([&istream = this->m_istream, &val]() mutable {
-                    istream >> val;
-                });
+                m_actions.emplace([&istream = this->m_istream, &val]() mutable { istream >> val; });
 
                 return std::move(*this);
             }
@@ -64,8 +59,7 @@ namespace eps
         istream_t& m_istream;
 
     public:
-        explicit pistream(istream_t& istream):
-            m_istream{istream}
+        explicit pistream(istream_t& istream): m_istream{istream}
         {}
 
         template<typename T>
@@ -82,15 +76,12 @@ namespace eps
         class __postream_temp
         {
         public:
-            __postream_temp(ostream_t& ostream):
-                m_ostream{ostream}
+            __postream_temp(ostream_t& ostream): m_ostream{ostream}
             {}
 
-            __postream_temp(__postream_temp&& other):
-                m_ostream{other.m_ostream},
-                m_actions{std::move(other.m_actions)}
+            __postream_temp(__postream_temp&& other): m_ostream{other.m_ostream}, m_actions{std::move(other.m_actions)}
             {
-                while(!other.m_actions.empty())
+                while (!other.m_actions.empty())
                 {
                     other.m_actions.pop();
                 }
@@ -109,9 +100,7 @@ namespace eps
             template<typename T>
             __postream_temp operator<<(T& val)
             {
-                m_actions.emplace([&ostream = this->m_ostream, &val]() mutable {
-                    ostream << val;
-                });
+                m_actions.emplace([&ostream = this->m_ostream, &val]() mutable { ostream << val; });
 
                 return std::move(*this);
             }
@@ -125,8 +114,7 @@ namespace eps
         ostream_t& m_ostream;
 
     public:
-        explicit postream(ostream_t& ostream):
-            m_ostream{ostream}
+        explicit postream(ostream_t& ostream): m_ostream{ostream}
         {}
 
         template<typename T>
@@ -143,17 +131,13 @@ namespace eps
         class __pstream_temp: private pstream_base
         {
         public:
-            __pstream_temp(istream_t& istream, ostream_t& ostream):
-                m_istream{istream},
-                m_ostream{ostream}
+            __pstream_temp(istream_t& istream, ostream_t& ostream): m_istream{istream}, m_ostream{ostream}
             {}
 
             __pstream_temp(__pstream_temp&& other):
-                m_istream{other.m_istream},
-                m_ostream{other.m_ostream},
-                m_actions{std::move(other.m_actions)}
+                m_istream{other.m_istream}, m_ostream{other.m_ostream}, m_actions{std::move(other.m_actions)}
             {
-                while(!other.m_actions.empty())
+                while (!other.m_actions.empty())
                 {
                     other.m_actions.pop();
                 }
@@ -162,7 +146,7 @@ namespace eps
             ~__pstream_temp()
             {
                 std::lock_guard<std::mutex> lk{g_mtx};
-                while(!m_actions.empty())
+                while (!m_actions.empty())
                 {
                     m_actions.front()();
                     m_actions.pop();
@@ -172,9 +156,7 @@ namespace eps
             template<typename T>
             __pstream_temp operator>>(T& val)
             {
-                m_actions.emplace([&istream = this->m_istream, &val]() mutable {
-                    istream >> val;
-                });
+                m_actions.emplace([&istream = this->m_istream, &val]() mutable { istream >> val; });
 
                 return std::move(*this);
             }
@@ -182,9 +164,7 @@ namespace eps
             template<typename T>
             __pstream_temp operator<<(T& val)
             {
-                m_actions.emplace([&ostream = this->m_ostream, &val]() mutable {
-                    ostream << val;
-                });
+                m_actions.emplace([&ostream = this->m_ostream, &val]() mutable { ostream << val; });
 
                 return std::move(*this);
             }
@@ -200,9 +180,7 @@ namespace eps
         ostream_t& m_ostream;
 
     public:
-        explicit pstream(istream_t& istream, ostream_t& ostream):
-            m_istream{istream},
-            m_ostream{ostream}
+        explicit pstream(istream_t& istream, ostream_t& ostream): m_istream{istream}, m_ostream{ostream}
         {}
 
         operator pistream<istream_t>()
