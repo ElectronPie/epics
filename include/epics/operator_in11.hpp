@@ -15,18 +15,14 @@ namespace eps
     {
     public:
         /**
-         * @brief Construct a new __operator_in_lhs object
+         * @brief Construct a new __operator_in_lhs object.
          *
          * @param val The value reference.
          */
         __operator_in_lhs(const T& val): val{val}
         {}
 
-        /**
-         * @brief The value reference.
-         *
-         */
-        const T& val;
+        const T& val; ///< The value reference
     };
 
     /**
@@ -46,7 +42,6 @@ namespace eps
 
     /**
      * @brief Intermediate struct hosting the operator to wrap a value into __operator_in_lhs.
-     *
      */
     struct __operator_in
     {};
@@ -57,7 +52,7 @@ namespace eps
      * @tparam T The value type.
      * @param lhs The value.
      * @param rhs __operator_in intermediate struct.
-     * @return __operator_in_lhs<T>
+     * @return __operator_in_lhs<T> The wrapped value.
      */
     template<typename T>
     __operator_in_lhs<T> operator|(const T& lhs, __operator_in rhs)
@@ -73,6 +68,5 @@ namespace eps
  *
  * A macro analog of the operator `in` that, given a value and a container,
  * returns a boolean indicating whether the value occurs in the container.
- *
  */
 #define in | eps::__operator_in{} |

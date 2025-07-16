@@ -10,7 +10,6 @@ namespace eps
 {
     /**
      * @brief Base class for the pstreams.
-     *
      */
     class pstream_base
     {
@@ -30,7 +29,6 @@ namespace eps
         /// @cond SHOW_INTERNAL
         /**
          * @brief Accumulates I/O operations to perform atomically.
-         *
          */
         class __pistream_temp: pstream_base
         {
@@ -58,7 +56,6 @@ namespace eps
 
             /**
              * @brief Destroy the __pistream_temp object performing the accumulated I/O operations atomically.
-             *
              */
             ~__pistream_temp()
             {
@@ -88,12 +85,10 @@ namespace eps
         private:
             /**
              * @brief Reference to the original input stream.
-             *
              */
             istream_t& m_istream;
             /**
              * @brief Queue of the I/O operations performed upon the object destruction.
-             *
              */
             std::queue<std::function<void()>> m_actions;
         };
@@ -137,7 +132,6 @@ namespace eps
         /// @cond SHOW_INTERNAL
         /**
          * @brief Accumulates I/O operations to perform atomically.
-         *
          */
         class __postream_temp
         {
@@ -165,7 +159,6 @@ namespace eps
 
             /**
              * @brief Destroy the __postream_temp object performing the accumulated I/O operations atomically.
-             *
              */
             ~__postream_temp()
             {
@@ -195,12 +188,10 @@ namespace eps
         private:
             /**
              * @brief Reference to the original output stream.
-             *
              */
             ostream_t& m_ostream;
             /**
              * @brief Queue of the I/O operations performed upon the object destruction.
-             *
              */
             std::queue<std::function<void()>> m_actions;
         };
@@ -208,7 +199,6 @@ namespace eps
     protected:
         /**
          * @brief Reference to the original output stream.
-         *
          */
         ostream_t& m_ostream;
         /// @endcond
@@ -249,7 +239,6 @@ namespace eps
         /// @cond SHOW_INTERNAL
         /**
          * @brief Accumulates I/O operations to perform atomically.
-         *
          */
         class __pstream_temp: private pstream_base
         {
@@ -279,7 +268,6 @@ namespace eps
 
             /**
              * @brief Destroy the __pstream_temp object performing the accumulated I/O operations atomically.
-             *
              */
             ~__pstream_temp()
             {
@@ -324,17 +312,14 @@ namespace eps
         private:
             /**
              * @brief Reference to the original input stream.
-             *
              */
             istream_t& m_istream;
             /**
              * @brief Reference to the original output stream.
-             *
              */
             ostream_t& m_ostream;
             /**
              * @brief Queue of the I/O operations performed upon the object destruction.
-             *
              */
             std::queue<std::function<void()>> m_actions;
         };
@@ -342,12 +327,10 @@ namespace eps
     protected:
         /**
          * @brief Reference to the original input stream.
-         *
          */
         istream_t& m_istream;
         /**
          * @brief Reference to the original output stream.
-         *
          */
         ostream_t& m_ostream;
         ///@endcond
@@ -409,58 +392,20 @@ namespace eps
         }
     };
 
-    /**
-     * @brief Thread-safe `std::cin` wrapper.
-     *
-     */
-    inline pistream<std::istream> pcin{std::cin};
-    /**
-     * @brief Thread-safe `std::wcin` wrapper.
-     *
-     */
-    inline pistream<std::wistream> pwcin{std::wcin};
+    inline pistream<std::istream> pcin{std::cin};    ///< Thread-safe `std::cin` wrapper.
+    inline pistream<std::wistream> pwcin{std::wcin}; ///< Thread-safe `std::wcin` wrapper.
 
-    /**
-     * @brief Thread-safe `std::cout` wrapper.
-     *
-     */
-    inline postream<std::ostream> pcout{std::cout};
-    /**
-     * @brief Thread-safe `std::wcout` wrapper.
-     *
-     */
-    inline postream<std::wostream> pwcout{std::wcout};
+    inline postream<std::ostream> pcout{std::cout};    ///< Thread-safe `std::cout` wrapper.
+    inline postream<std::wostream> pwcout{std::wcout}; ///< Thread-safe `std::wcout` wrapper.
 
-    /**
-     * @brief Thread-safe `std::cerr` wrapper.
-     *
-     */
-    inline postream<std::ostream> pcerr{std::cerr};
-    /**
-     * @brief Thread-safe `std::wcerr` wrapper.
-     *
-     */
-    inline postream<std::wostream> pwcerr{std::wcerr};
+    inline postream<std::ostream> pcerr{std::cerr};    ///< Thread-safe `std::cerr` wrapper.
+    inline postream<std::wostream> pwcerr{std::wcerr}; ///< Thread-safe `std::wcerr` wrapper.
 
-    /**
-     * @brief Thread-safe `std::clog` wrapper.
-     *
-     */
-    inline postream<std::ostream> pclog{std::clog};
-    /**
-     * @brief Thread-safe `std::wclog` wrapper.
-     *
-     */
-    inline postream<std::wostream> pwclog{std::wclog};
+    inline postream<std::ostream> pclog{std::clog};    ///< Thread-safe `std::clog` wrapper.
+    inline postream<std::wostream> pwclog{std::wclog}; ///< Thread-safe `std::wclog` wrapper.
 
-    /**
-     * @brief Thread-safe I/O wrapper for `std::cin` and `std::cout`.
-     *
-     */
     inline pstream<std::istream, std::ostream> pcio{std::cin, std::cout};
-    /**
-     * @brief Thread-safe I/O wrapper for `std::wcin` and `std::wcout`.
-     *
-     */
+    ///<  Thread-safe I/O wrapper for `std::cin` and `std::cout`.
     inline pstream<std::wistream, std::wostream> pwcio{std::wcin, std::wcout};
+    ///<  Thread-safe I/O wrapper for `std::wcin` and `std::wcout`.
 } // namespace eps

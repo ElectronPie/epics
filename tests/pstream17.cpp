@@ -18,8 +18,9 @@ using data_type                            = unsigned int;
 std::atomic<bool> go = false;
 
 template<std::size_t... Is>
-inline std::array<data_type, same_values_in_a_row>
-pistream_work(eps::pistream<std::stringstream> pistream, std::index_sequence<Is...>)
+inline std::array<data_type, same_values_in_a_row> pistream_work(
+    eps::pistream<std::stringstream> pistream, std::index_sequence<Is...>
+)
 {
     std::array<data_type, same_values_in_a_row> readings;
     (pistream >> ... >> readings[Is]);
@@ -47,8 +48,9 @@ void do_postream_work(data_type n, eps::postream<std::stringstream> postream)
 }
 
 template<std::size_t... Is>
-inline std::array<data_type, same_values_in_a_row>
-pstream_work(data_type n, eps::pstream<std::stringstream, std::stringstream> pstream, std::index_sequence<Is...>)
+inline std::array<data_type, same_values_in_a_row> pstream_work(
+    data_type n, eps::pstream<std::stringstream, std::stringstream> pstream, std::index_sequence<Is...>
+)
 {
     std::array<data_type, same_values_in_a_row> readings;
     ((pstream << ... << (Is, std::to_string(n).append(" "))) >> ... >> readings[Is]);
