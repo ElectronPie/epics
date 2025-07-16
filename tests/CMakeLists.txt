@@ -16,3 +16,8 @@ add_executable(pstream17 pstream17.cpp)
 target_compile_features(pstream17 PRIVATE cxx_std_17)
 target_link_libraries(pstream17 PRIVATE epics doctest::doctest)
 add_test(NAME pstream17_test COMMAND pstream17)
+
+add_executable(public_cast20 public_cast20.cpp)
+target_compile_features(public_cast20 PRIVATE cxx_std_20)
+target_link_libraries(public_cast20 PRIVATE epics doctest::doctest)
+add_test(NAME public_cast20_test COMMAND public_cast20)

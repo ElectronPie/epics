@@ -24,6 +24,7 @@ version required for each of the libraries in EPICS
 |-------------------|----------------------|
 | operator_in11.hpp | C++11                |
 | pstream17.hpp     | C++17                |
+| public_cast20.hpp | C++20                |
 
 *operator_in11.hpp* provides a macro analog of an operator `in` that, given a
 value and a container, returns a boolean indicating whether the value occurs in
@@ -31,3 +32,5 @@ the container.
 
 *pstream17.hpp* provides wrappers for stream types for thread-safe I/O, as well
 as wrapper instances for standard I/O streams.
+
+*public_cast20.hpp* provides templates for accessing private class members.
