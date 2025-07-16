@@ -1,4 +1,13 @@
-#pragma once
+/**
+ * @file pstream17.hpp
+ * @author ElectronPie (tima001f@gmail.com)
+ * @brief Thread-safe wrappers for input/output streams.
+ *
+ * @copyright Copyright (c) 2025 ElectronPie
+ */
+
+#ifndef EPICS_PSTREAM17_HPP
+#define EPICS_PSTREAM17_HPP
 
 #include <functional>
 #include <iostream>
@@ -6,6 +15,9 @@
 #include <queue>
 #include <unordered_map>
 
+/**
+ * @brief Namespace for EPICS library.
+ */
 namespace eps
 {
     /**
@@ -409,3 +421,5 @@ namespace eps
     inline pstream<std::wistream, std::wostream> pwcio{std::wcin, std::wcout};
     ///<  Thread-safe I/O wrapper for `std::wcin` and `std::wcout`.
 } // namespace eps
+
+#endif // EPICS_PSTREAM17_HPP

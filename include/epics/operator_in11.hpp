@@ -1,7 +1,20 @@
-#pragma once
+/**
+ * @file operator_in11.hpp
+ * @author ElectronPie (tima001f@gmail.com)
+ * @brief A macro analog of the operator `in` that, given a value and a container,
+ * returns a boolean indicating whether the value occurs in the container.
+ *
+ * @copyright Copyright (c) 2025 ElectronPie
+ */
+
+#ifndef EPICS_OPERATOR_IN11_HPP
+#define EPICS_OPERATOR_IN11_HPP
 
 #include <algorithm>
 
+/**
+ * @brief Namespace for EPICS library.
+ */
 namespace eps
 {
     /// @cond SHOW_INTERNAL
@@ -70,3 +83,5 @@ namespace eps
  * returns a boolean indicating whether the value occurs in the container.
  */
 #define in | eps::__operator_in{} |
+
+#endif // EPICS_OPERATOR_IN11_HPP
