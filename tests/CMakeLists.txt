@@ -7,6 +7,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(doctest)
 # Adds doctest::doctest
 
+add_executable(enums_as_flags11 enums_as_flags11.cpp)
+target_compile_features(enums_as_flags11 PRIVATE cxx_std_11)
+target_link_libraries(enums_as_flags11 PRIVATE epics doctest::doctest)
+add_test(NAME enums_as_flags11_test COMMAND enums_as_flags11)
+
 add_executable(operator_in11 operator_in11.cpp)
 target_compile_features(operator_in11 PRIVATE cxx_std_11)
 target_link_libraries(operator_in11 PRIVATE epics doctest::doctest)

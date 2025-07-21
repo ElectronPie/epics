@@ -20,11 +20,15 @@ is also the C++ standerd the tests for this library are utilizing.
 The following table contains brief information about the minimum C++ standarard
 version required for each of the libraries in EPICS
 
-| Header            | Minimum C++ standard |
-|-------------------|----------------------|
-| operator_in11.hpp | C++11                |
-| pstream17.hpp     | C++17                |
-| public_cast20.hpp | C++20                |
+| Header               | Minimum C++ standard |
+|----------------------|----------------------|
+| enums_as_flags11.hpp | C++11                |
+| operator_in11.hpp    | C++11                |
+| pstream17.hpp        | C++17                |
+| public_cast20.hpp    | C++20                |
+
+*enums_as_flags11.hpp* provides a macro EPS_ENUM_AS_FLAGS for implementing
+bitwise operations on enums as flags.
 
 *operator_in11.hpp* provides a macro analog of an operator `in` that, given a
 value and a container, returns a boolean indicating whether the value occurs in
